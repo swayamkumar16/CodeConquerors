@@ -9,7 +9,12 @@ buttons.forEach(button => {
             display.textContent = '0';
         } else if (button.classList.contains('equal')) {
             try {
-                display.textContent = eval(display.textContent);
+                if (display.textContent === '69') {
+                    // Redirect to secret page
+                    window.location.href = 'secret.html';
+                } else {
+                    display.textContent = eval(display.textContent);
+                }
             } catch (error) {
                 display.textContent = 'Error';
             }
