@@ -1,60 +1,124 @@
+/* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     margin: 0;
-    padding: 0;
+    overflow: hidden;
 }
 
-header {
-    background-color: rgb(245, 17, 17);
-    padding: 20px;
+.container {
     text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    color: #070707;
-}
-
-main {
+    background: #ffffff;
     padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
 }
 
-section {
+h1 {
+    font-size: 3rem;
+    color: #ff6b6b;
     margin-bottom: 20px;
 }
 
-h2 {
-    color: red;
+.player-inputs {
+    margin-bottom: 20px;
 }
 
-ul {
+.player-inputs input {
+    padding: 10px;
+    font-size: 1rem;
+    margin: 5px;
+    border: 2px solid #ff6b6b;
+    border-radius: 5px;
+}
+
+.board {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background: #ffe66d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: #2b2d42;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.cell:hover {
+    background: #ffd700;
+}
+
+.cell:active {
+    transform: scale(0.95);
+}
+
+.status {
+    font-size: 1.5rem;
+    color: #2b2d42;
+    margin-bottom: 20px;
+}
+
+.start-button, .reset-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #2b2d42;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.start-button:hover, .reset-button:hover {
+    background: #4a4e69;
+}
+
+.win {
+    background-color: #a1ffb1 !important;
+}
+
+.leaderboard {
+    margin-top: 20px;
+}
+
+.leaderboard h2 {
+    font-size: 1.5rem;
+    color: #2b2d42;
+}
+
+.leaderboard ul {
     list-style-type: none;
     padding: 0;
 }
 
-ul li {
-    background-color: #222;
+.leaderboard li {
+    font-size: 1rem;
+    color: #2b2d42;
     margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
 }
 
-a {
-    color: #b00;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    background-color: #111;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
+#confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    pointer-events: none;
 }

@@ -3,48 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DTMF Controlled Door Lock System</title>
+    <title>Tic Tac Toe Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>DTMF Controlled Door Lock System</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Overview</h2>
-            <p>The DTMF controlled door lock system uses Dual Tone Multi Frequency (DTMF) signals from a mobile phone to control the locking and unlocking mechanism of a door.</p>
-        </section>
-        <section>
-            <h2>Components</h2>
-            <ul>
-                <li>Mobile Phone</li>
-                <li>MT8870 DTMF Decoder</li>
-                <li>7404 Hex Inverter</li>
-                <li>L293D Motor Driver</li>
-                <li>Door Mechanism</li>
-                <li>Power Supply (+5V)</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Operation</h2>
-            <p>When the first phone receives a call, it transmits DTMF signals. The MT8870 DTMF decoder processes these signals and outputs a corresponding binary code. The 7404 hex inverter processes these signals and sends them to the L293D motor driver, which controls the door mechanism to open or close the door based on the received DTMF signals.</p>
-        </section>
-        <section>
-            <h2>Resources</h2>
-            <p>To learn more about DTMF controlled door lock systems, visit the following resources:</p>
-            <ul>
-                <li><a href="https://www.instructables.com/DTMF-Door-Lock-System/" target="_blank">Instructables Tutorial</a></li>
-                <li><a href="https://www.electronicshub.org/dtmf-projects/" target="_blank">Electronics Hub</a></li>
-                <li><a href="https://kitsguru.com/" target="_blank">KitsGuru Kit</a></li>
-            </ul>
-        </section>
-    </main>
-    <BR>
-        <BR>
-    <footer>
-        <p>&copy; 2024 SWAYAM and UDAY</p>
-    </footer>
+    <div class="container">
+        <h1>Tic Tac Toe</h1>
+        <div class="player-inputs">
+            <input type="text" id="player1" placeholder="Player 1 Name" />
+            <input type="text" id="player2" placeholder="Player 2 Name" />
+        </div>
+        <button onclick="startGame()" class="start-button">Start Game</button>
+        <div id="board" class="board" style="display: none;">
+            <div class="cell" onclick="handleMove(0)"></div>
+            <div class="cell" onclick="handleMove(1)"></div>
+            <div class="cell" onclick="handleMove(2)"></div>
+            <div class="cell" onclick="handleMove(3)"></div>
+            <div class="cell" onclick="handleMove(4)"></div>
+            <div class="cell" onclick="handleMove(5)"></div>
+            <div class="cell" onclick="handleMove(6)"></div>
+            <div class="cell" onclick="handleMove(7)"></div>
+            <div class="cell" onclick="handleMove(8)"></div>
+        </div>
+        <p id="status" class="status">Enter player names and start the game!</p>
+        <button onclick="resetGame()" class="reset-button" style="display: none;">Reset Game</button>
+        <div id="leaderboard" class="leaderboard">
+            <h2>Leaderboard</h2>
+            <ul id="leaderboard-list"></ul>
+        </div>
+        <audio id="move-sound" src="move.mp3"></audio>
+        <audio id="win-sound" src="win.mp3"></audio>
+        <audio id="draw-sound" src="draw.mp3"></audio>
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+
+    <script src="confetti.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
