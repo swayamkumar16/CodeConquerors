@@ -7,7 +7,6 @@ body {
     background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     margin: 0;
-    overflow: hidden;
 }
 
 .container {
@@ -32,7 +31,7 @@ h1 {
 
 .player-inputs input {
     padding: 10px;
-    font-size: 1rem;
+    font-size: 1.2rem; /* Adjust font size for better readability on mobile */
     margin: 5px;
     border: 2px solid #ff6b6b;
     border-radius: 5px;
@@ -41,19 +40,19 @@ h1 {
 .board {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(3, 100px);
+    grid-template-columns: repeat(3, 80px); /* Adjust cell width for smaller screens */
     gap: 10px;
     margin-bottom: 20px;
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 80px; /* Adjust cell size for smaller screens */
+    height: 80px; /* Adjust cell size for smaller screens */
     background: #ffe66d;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
+    font-size: 2rem; /* Adjust font size for better readability on mobile */
     color: #2b2d42;
     border-radius: 10px;
     cursor: pointer;
@@ -69,7 +68,7 @@ h1 {
 }
 
 .status {
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* Adjust font size for better readability on mobile */
     color: #2b2d42;
     margin-bottom: 20px;
 }
@@ -121,4 +120,21 @@ h1 {
     width: 100%;
     height: 100%;
     pointer-events: none;
+}
+
+/* Media query for smaller screens (adjust as needed) */
+@media (max-width: 768px) {
+    .board {
+        grid-template-columns: repeat(3, 60px); /* Adjust cell width for smaller screens */
+    }
+
+    .cell {
+        width: 60px; /* Adjust cell size for smaller screens */
+        height: 60px; /* Adjust cell size for smaller screens */
+        font-size: 1.5rem; /* Adjust font size for better readability on smaller screens */
+    }
+
+    .status {
+        font-size: 1rem; /* Adjust font size for better readability on smaller screens */
+    }
 }
