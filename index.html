@@ -3,178 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DTMF Controlled Door Lock System</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Cricket Team Shuffler</title>
+    <style>
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes cricketBall {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://via.placeholder.com/1920x1080.png?text=');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(45, 52, 54, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #00b894;
+            animation: bounce 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        h2, h3 {
+            color: #00b894;
+            text-align: center;
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #fd79a8;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background-color: #e84393;
+            transform: scale(1.05);
+        }
+        #playerList, .team {
+            margin-top: 20px;
+        }
+        .player {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            animation: fadeIn 0.5s;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .player:hover {
+            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .captain {
+            font-weight: bold;
+            color: #ffeaa7;
+            position: relative;
+        }
+        .captain::after {
+            content: '🏏';
+            margin-left: 10px;
+            font-size: 1.2em;
+        }
+        .teams-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .team {
+            flex-basis: 48%;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #cricket-transition {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: #f50659;
+            border-radius: 50%;
+            display: none;
+            z-index: 1000;
+        }
+        .remove-player {
+            background-color: #f60b0b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #addPlayerBtn {
+            background-color: #0984e3;
+        }
+        #addPlayerBtn:hover {
+            background-color: #74b9ff;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .team {
+                flex-basis: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-     <!-- Particle Background -->
-     <div class="particle-background"></div>
-    <header>
-        <h1>DTMF Controlled Door Lock System</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Overview</h2>
-            <p>The DTMF controlled door lock system uses Dual Tone Multi Frequency (DTMF) signals from a mobile phone to control the locking and unlocking mechanism of a door.</p>
-        </section>
-        <section>
-            <h2>Components</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>S. No.</th>
-                        <th>Product</th>
-                        <th>Price (Rs.)</th>
-                        <th>Quantity</th>
-                        <th>Total Price (Rs.)</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>MT8870 DTMF Decoder IC</td>
-                        <td>₹295.00</td>
-                        <td>3</td>
-                        <td>₹885.00</td>
-                        <td><a href="https://www.amazon.in/Integrated-Circuit-MT8870-DTMF-DECODER/dp/B0CPTH6R89/ref=sr_1_1?crid=2F02ISSS2SBY5&dib=eyJ2IjoiMSJ9.i0v3-uFWnaZBaxEaR3iexAOhyrrmoj33KuYcBxjHT8DNvqHBmAPaam8vDhpbtAE_vNDDj0BTAVV7bwaDj-ou5dbt656REN-BJL1Xp_NrswAES3NB3S1GLv_KTQGjEYaKdLDTY69Vosqb4QoI4AdOUu7zx4nNB5dHaDjwnDHgHpSw0qcUWzXDlePyJca6BB3yrKOEjo_mjTsUiq60Wm4C8phApsaqShHGVNEwE7WUwrDi2zVDJLoaeCC-Ro7vsyuGD5Oh26fIQ2riXzB-aaCIYwbTI36zmmTVf2MjcmZ5Y9o.l0TeDQIHU4hE3RZbraQxh7b7VO3r8_sBbMPdzqyeukY&dib_tag=se&keywords=mt8870+ic&qid=1723695816&sprefix=%2Caps%2C267&sr=8-1">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>7404 HEX Inverter</td>
-                        <td>₹59.00</td>
-                        <td>3</td>
-                        <td>₹177.00</td>
-                        <td><a href="https://www.amazon.in/Generic-SN74HC04N-Hex-Inverter/dp/B09BD46NCF/ref=sr_1_1?crid=35E5GD3U6I9GX&dib=eyJ2IjoiMSJ9.F_xrVRZ81OFqJ0MkEruj60g-xseEsQh0r-UatF2QnUKnHHBmub8J5x-crW90YF-VsYLFTXinyX_bx-ke6u2LlJj96sqbI_PUAsBcHFrS4xnLzx0pB_FEMM7WWoan3SyCGj_sIO9RU-BqHP8MbKGrqhFU84sH6DJm-zk35zW8mQqKj_8Awc6bmy345iSp5HP7FOkRyg68LLI7deXawZVqikLfa5FyTW60dIhgSQ8Z7CnqQgabCusPlYjlwXrX8QuTDFtar9VrE-hm-_NcIVKpTmPuEiZ6jSDJRI6y7aiKPZ4.kWtyNU2k2Fu38_XVWM53EA7BRUdIvE7UZX7ZQ6I7duY&dib_tag=se&keywords=7404+ic&qid=1723695898&sprefix=7404+i%2Caps%2C236&sr=8-1">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>L293D Motor Driver IC</td>
-                        <td>₹89.00</td>
-                        <td>3</td>
-                        <td>₹267.00</td>
-                        <td><a href="https://www.amazon.in/L293D-Motor-Driver-IC-H-Bridge/dp/B07H33D96R/ref=sr_1_6?crid=31314GPJOFBR8&dib=eyJ2IjoiMSJ9.SWfMqfQQmndk21aaDrxYifLor5QMoX9PbM3gHflmHxMzzeyvvH2I7K8Tw9qdM-hb91cBkiYAILKh4g4FizBrrMykPkJUs8c2ipEzlOy1E6fXv2Qe_Fb7S3PPcmg_ZbdH8R5xh_5-FtoG2_t-u4C0t60scX0bgmLpI7WUnmN-SxmxEbamk2QXWEyyXaP6UiJxwMsb6106Vb9F9HDzS1ymfUxYGH3XXk16diDr3_5QttstHTxyw1Z1fS7jw2mMbxFe1We5EU0sR-CcEiggHuI6GcMz5WHLJubn6XUXLzFdQtM.bQVJcGd6J231BG-ikuKp4DZgwIFm3lSQcjHbmuACHMk&dib_tag=se&keywords=l293d%2Bmotor%2Bdriver%2Bic&qid=1723695985&sprefix=l293d%2Bmotor%2Bdriver%2Bi%2Caps%2C240&sr=8-6&th=1">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>CD-Drive</td>
-                        <td>₹1,495.00</td>
-                        <td>1</td>
-                        <td>₹1,495.00</td>
-                        <td><a href="https://www.amazon.in/CEZO-External-Portable-DVD-ROM-Notebook/dp/B09BF66ZZ3/ref=sr_1_17?crid=H0R7B9ULE8R7&dib=eyJ2IjoiMSJ9.d5S6u1se9rMViW5Nl8NHmT6rQGGycBFuL8aTEv7meD9YQj4vKl4GJM9uWvptDX0KwItIzUacyp8usd1HhjSF1ZDYouywCwXCbp1DVCZ8hfdr7gpMN8S6mNPt7u9UpNy0ELnRrmuoNlYo5e1g1Hryegl1V9zlBaB16bHtmdvYpEy-ZO257GUzWWyhkDr3UozJGh56Y8nsRlaCFRJoRlNw8UtOOCrL49F_DCu7njohi_A.i5pXqwIY1ZW2AGO2ujT0yocpBbq2JiLklp7PSc9ZQmI&dib_tag=se&keywords=cd+driver+for+pc+1495&qid=1723696034&sprefix=cd+driver+for+pc+149%2Caps%2C231&sr=8-17">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Resistor Kit</td>
-                        <td>₹519.00</td>
-                        <td>1</td>
-                        <td>₹519.00</td>
-                        <td><a href="https://www.amazon.in/klera-Value-Resistor-Kit-1ohm/dp/B0735LQ6XF/ref=sr_1_12?crid=3B41ER4L3KKCL&dib=eyJ2IjoiMSJ9.-rNNamphHpxjyZ3y04RoHoBqY4nFCZgvCDfkL515SGqGBB5cX_Ok0gIIsZtxc7bD2706yFMq80qIkxhkcaf8MKKASt2s9UaQTebAJ35YmWo4bk_wc-HETEAhs6ANt-AGNB_Ddl20jicJmeae6R0c6OHrDVRGWytQm7N6PxpzrP630cZMV2uctzPmQQPaCMeVOlcSf4c6VAeCusF79xq7we7w2VcIftoqzBqR5ht5eFDoCu9388yZ6RavbxB5dWqD_zYLRH6B2G_KMUjXxejDjSjReAwIjrQTR7DXrIr2jT4.eBX5_yGpCRCtwobYNOrXy0IcPJ62Ab-jiA9qr4OkNvU&dib_tag=se&keywords=resistor+kit&qid=1723696086&sprefix=resistor+kit+%2Caps%2C241&sr=8-12">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Oscillator</td>
-                        <td>₹192.00</td>
-                        <td>3</td>
-                        <td>₹576.00</td>
-                        <td><a href="https://www.amazon.in/dp/B0BHJ374YC?ref=cm_sw_r_cp_ud_dp_HSTV5TNBYM86GG345Z8T&ref_=cm_sw_r_cp_ud_dp_HSTV5TNBYM86GG345Z8T&social_share=cm_sw_r_cp_ud_dp_HSTV5TNBYM86GG345Z8T&th=1">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Capacitor Kit</td>
-                        <td>₹299.00</td>
-                        <td>1</td>
-                        <td>₹299.00</td>
-                        <td><a href="https://www.amazon.in/TechDelivers-Electrolytic-Capacitor-12-Values-50-Pieces/dp/B07G7FFWYL/ref=sr_1_8?crid=1T3IZN5F3M5MH&dib=eyJ2IjoiMSJ9.ExLdB9iKsnKEQiVKSe2Cj4M0lM62afu2AFYvY5K0FadO7rfaQuufekzzwb3_kZkoiYAp4szWgKMSHEVdJ1SZZV4lREtwGw0aQeuCRpKXmpMprDqANUbW4UBCm91iGTgqrdgtjnxAT9P-678vv7_pzr8CoybURomONIk-PJkZsgaZxkYmImFHBHxfBs-44InSq18UCnS-uqKQ-4BdQerD_QGyjPPhiPCvbMtuayzVEgwEmLXpFqJGJC6cv_EcKFRR0E-Jq_uQ8PdF3GCB8GnVtW16s3YlGCtLbjfi6MI1qNI.c6iIsKn9yjpMNkTPpKZ2ACdXBJ-DTrVkHh37PJVKTIA&dib_tag=se&keywords=capacitor+kit&qid=1723696235&sprefix=capac%2Caps%2C232&sr=8-8">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Breadboard</td>
-                        <td>₹196.00</td>
-                        <td>1</td>
-                        <td>₹196.00</td>
-                        <td><a href="https://www.amazon.in/Robotbanao-Solderless-MB102-Breadboard-Points/dp/B08GG6ZC41/ref=sr_1_8?crid=3F8G36BUBP77D&dib=eyJ2IjoiMSJ9.90gKDzZV_VCdozK0sQaNgx_2ybPDtWcO8UEjm0dh3IwuwknipFV3BKxJKqPCuEoszfS62AJreHMHgfsZjQAlLQca07Z57iiTn7vbFuj8nf3ZZePPkat6jsBs4wol_fJNGEkG0tHWIyNPL35a9UPhSWmphrf3vzDTNKt2K5t6ZumHujX_-Nh7vJC6IeV-73vRjBMlcabmgvawKtnOLzuIpHozJGgE15dtH4Y1uqvYofxRozefOWpruVM-GsJxBvLEju-MQL9S0XaBPX5ot18Li4lmui46OxbUmEz8CZl95pc.xaMCPbvvsyqi0CobQ-CXeMO8wyOahMTA33iHvV9O3Bw&dib_tag=se&keywords=breadboard&qid=1723696361&sprefix=breadboard%2Caps%2C236&sr=8-8&th=1">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Connecting Wires</td>
-                        <td>₹315.00</td>
-                        <td>1</td>
-                        <td>₹315.00</td>
-                        <td><a href="https://www.amazon.in/ElectronicSpices-Electric-Science-Projects-Building/dp/B081Z8CY53/ref=sr_1_6?crid=1FM1FIN4NPATJ&dib=eyJ2IjoiMSJ9.bbviXnwX4ad1hEYobvFCPin5x-6KpfXOWB1xZNh-MCnpOiUhNiTxnNgmg9cuVv_vrw9K-kfFL96nl6aA0lORo5m2GJPWNrMzAvl5HemwTPURFxAM6_3zVgKXt2-JRatEBHUwb9KMOoFA80Qtpoti82KLFltT4goK_Abo61zrGnvDB1TZDivcCVoNvGQ2JNvkdcqpQ_s7sTzozS_GL828q_3cKns_4k70bnP2IaR9sbIMFgkQoIFUu1QdtJAzQ8sQ_dpQPHpq7DqGQ9RP1E988C8J5VXfgEtrLusSqvPOMU0.92F7nBAthO-5JP_wukIyq92GpkkGUORpjj9R_QazbTw&dib_tag=se&keywords=connecting+wires+for+circuits&qid=1723696412&sprefix=connecting+%2Caps%2C258&sr=8-6">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Jumper Wires</td>
-                        <td>₹240.00</td>
-                        <td>1</td>
-                        <td>₹240.00</td>
-                        <td><a href="https://www.amazon.in/TRUSTECH-Breadboard-Jumper-Multicolored-Pieces/dp/B09KQZ5QD5/ref=sr_1_3_sspa?crid=1FM1FIN4NPATJ&dib=eyJ2IjoiMSJ9.bbviXnwX4ad1hEYobvFCPin5x-6KpfXOWB1xZNh-MCnpOiUhNiTxnNgmg9cuVv_vrw9K-kfFL96nl6aA0lORo5m2GJPWNrMzAvl5HemwTPURFxAM6_3zVgKXt2-JRatEBHUwb9KMOoFA80Qtpoti82KLFltT4goK_Abo61zrGnvDB1TZDivcCVoNvGQ2JNvkdcqpQ_s7sTzozS_GL828q_3cKns_4k70bnP2IaR9sbIMFgkQoIFUu1QdtJAzQ8sQ_dpQPHpq7DqGQ9RP1E988C8J5VXfgEtrLusSqvPOMU0.92F7nBAthO-5JP_wukIyq92GpkkGUORpjj9R_QazbTw&dib_tag=se&keywords=connecting+wires+for+circuits&qid=1723696412&sprefix=connecting+%2Caps%2C258&sr=8-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>5V Battery (1500mAH)</td>
-                        <td>₹559.00</td>
-                        <td>2</td>
-                        <td>₹1,118.00</td>
-                        <td><a href="https://amzn.in/d/gdlISvX">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>Battery Charger (18650)</td>
-                        <td>₹399.00</td>
-                        <td>1</td>
-                        <td>₹399.00</td>
-                        <td><a href="https://amzn.in/d/2gDFDrS">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>Limit Switch (4pc)</td>
-                        <td>₹671.00</td>
-                        <td>1</td>
-                        <td>₹671.00</td>
-                        <td><a href="https://amzn.in/d/1bnUihA">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>Arduino UNO</td>
-                        <td>₹729.00</td>
-                        <td>2</td>
-                        <td>₹1,458.00</td>
-                        <td><a href="https://amzn.in/d/4r7wxgz">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>Nokia 130</td>
-                        <td>₹1,849.00</td>
-                        <td>1</td>
-                        <td>₹1,849.00</td>
-                        <td><a href="https://amzn.in/d/gLfuKEF">Link</a></td>
-                    </tr>
-                    <tr>
-                        <td>16</td>
-                        <td>Miscellaneous</td>
-                        <td>₹536.00</td>
-                        <td>1</td>
-                        <td>₹536.00</td>
-                        <td></td>
-                    </tr>
-                    <tr class="total-row">
-                        <td colspan="3"><strong>Total</strong></td>
-                        <td colspan="2"><strong>₹11,000.00</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        <section>
-            <h2>Operation</h2>
-            <p>When the first phone receives a call, it transmits DTMF signals. The MT8870 DTMF decoder processes these signals and outputs a corresponding binary code. The 7404 hex inverter processes these signals and sends them to the L293D motor driver, which controls the door mechanism to open or close the door based on the received DTMF signals.</p>
-        </section>
-        
-    </main>
-    <footer>
-        <p>&copy; 2024 SWAYAM and UDAY</p>
-    </footer>
-    <script src="script.js"></script>
+    <div class="container">
+        <h1>Cricket Team Shuffler</h1>
+        <input type="text" id="playerName" placeholder="Enter player name">
+        <button id="addPlayerBtn" onclick="addPlayer()">Add Player</button>
+        <button onclick="shuffleIntoTwoTeams()">Shuffle into Two Teams</button>
+        <div id="playerList"></div>
+        <div class="teams-container">
+            <div id="team1" class="team"></div>
+            <div id="team2" class="team"></div>
+        </div>
+    </div>
+    <div id="cricket-transition"></div>
+    <audio id="transitionSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+
+    <script>
+        let players = [];
+
+        function addPlayer() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (playerName) {
+                players.push(playerName);
+                updatePlayerList();
+                document.getElementById('playerName').value = '';
+            }
+        }
+
+        document.getElementById('playerName').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                addPlayer();
+            }
+        });
+
+        function removePlayer(index) {
+            players.splice(index, 1);
+            updatePlayerList();
+        }
+
+        function updatePlayerList() {
+            const playerList = document.getElementById('playerList');
+            playerList.innerHTML = '<h3>Players:</h3>';
+            players.forEach((player, index) => {
+                const playerElement = document.createElement('div');
+                playerElement.classList.add('player');
+                playerElement.style.animationDelay = `${index * 0.1}s`;
+                playerElement.innerHTML = `
+                    <span>${player}</span>
+                    <button class="remove-player" onclick="removePlayer(${index})">X</button>
+                `;
+                playerList.appendChild(playerElement);
+            });
+        }
+
+        function shuffleIntoTwoTeams() {
+            if (players.length < 4) {
+                alert('Please add at least 4 players');
+                return;
+            }
+
+            // Cricket ball transition
+            const cricketBall = document.getElementById('cricket-transition');
+            cricketBall.style.display = 'block';
+            cricketBall.style.animation = 'cricketBall 1s ease-in-out';
+
+            // Play sound
+            document.getElementById('transitionSound').play();
+
+            setTimeout(() => {
+                const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+                const midpoint = Math.ceil(shuffledPlayers.length / 2);
+                const team1Players = shuffledPlayers.slice(0, midpoint);
+                const team2Players = shuffledPlayers.slice(midpoint);
+
+                const team1Captain = team1Players[Math.floor(Math.random() * team1Players.length)];
+                const team2Captain = team2Players[Math.floor(Math.random() * team2Players.length)];
+
+                displayTeam('team1', 'Team 1', team1Players, team1Captain);
+                displayTeam('team2', 'Team 2', team2Players, team2Captain);
+
+                document.querySelector('.teams-container').style.opacity = '1';
+
+                // Scroll to teams after shuffling
+                document.querySelector('.teams-container').scrollIntoView({ behavior: 'smooth' });
+
+                cricketBall.style.display = 'none';
+            }, 1000);
+        }
+
+        function displayTeam(teamId, teamName, teamPlayers, captain) {
+            const teamElement = document.getElementById(teamId);
+            teamElement.innerHTML = `<h2>${teamName}</h2>`;
+            teamPlayers.forEach((player, index) => {
+                const playerElement = document.createElement('div');
+                playerElement.classList.add('player');
+                playerElement.style.animationDelay = `${index * 0.1}s`;
+                if (player === captain) {
+                    playerElement.classList.add('captain');
+                    playerElement.textContent = `${player} (Captain)`;
+                } else {
+                    playerElement.textContent = player;
+                }
+                teamElement.appendChild(playerElement);
+            });
+        }
+    </script>
 </body>
 </html>
